@@ -67,15 +67,21 @@ dependencies {
     compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
     compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     compile "com.android.support.test.espresso:espresso-idling-resource:$rootProject.espressoVersion"
-    compile "com.google.guava:guava:$rootProject.guavaVersion"
+    compile("com.google.guava:guava:$rootProject.guavaVersion", {
+        exclude module: "rxjava"
+    })
 
     // Dependencies for local unit tests
     testCompile "junit:junit:$rootProject.ext.junitVersion"
-    testCompile "org.mockito:mockito-all:$rootProject.ext.mockitoVersion"
+    testCompile("org.mockito:mockito-all:$rootProject.ext.mockitoVersion") {
+        exclude module: "hamcrest-core"
+    }
     testCompile "org.hamcrest:hamcrest-all:$rootProject.ext.hamcrestVersion"
 
     // Android Testing Support Library's runner and rules
-    androidTestCompile "com.android.support.test:runner:$rootProject.ext.runnerVersion"
+    androidTestCompile("com.android.support.test:runner:$rootProject.ext.runnerVersion") {
+        exclude module: "support-annotations"
+    }
     androidTestCompile "com.android.support.test:rules:$rootProject.ext.runnerVersion"
 
     // Dependencies for Android unit tests
@@ -85,8 +91,14 @@ dependencies {
     androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
 
     // Espresso UI Testing
-    androidTestCompile "com.android.support.test.espresso:espresso-core:$rootProject.espressoVersion"
-    androidTestCompile "com.android.support.test.espresso:espresso-contrib:$rootProject.espressoVersion"
+    androidTestCompile("com.android.support.test.espresso:espresso-core:$rootProject.espressoVersion", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestCompile("com.android.support.test.espresso:espresso-contrib:$rootProject.espressoVersion") {
+        exclude module: "design"
+        exclude module: "support-v4"
+        exclude module: "recyclerview-v7"
+    }
     androidTestCompile "com.android.support.test.espresso:espresso-intents:$rootProject.espressoVersion"
 
     // Resolve conflicts between main and test APK:

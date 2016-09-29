@@ -64,15 +64,11 @@ public class AddEditTaskActivity extends AppCompatActivity {
                 actionBar.setTitle(R.string.add_task);
             }
 
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-                    addEditTaskFragment, R.id.contentFrame);
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), addEditTaskFragment, R.id.contentFrame);
         }
 
         // Create the presenter
-        new AddEditTaskPresenter(
-                taskId,
-                Injection.provideTasksRepository(getApplicationContext()),
-                addEditTaskFragment);
+        new AddEditTaskPresenter(taskId, Injection.provideTasksRepository(getApplicationContext()), addEditTaskFragment);
     }
 
     @Override

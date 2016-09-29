@@ -102,8 +102,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.tasks_frag, container, false);
 
         // Set up tasks view
@@ -125,8 +124,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         });
 
         // Set up floating action button
-        FloatingActionButton fab =
-                (FloatingActionButton) getActivity().findViewById(R.id.fab_add_task);
+        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab_add_task);
 
         fab.setImageResource(R.drawable.ic_add);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -137,8 +135,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         });
 
         // Set up progress indicator
-        final ScrollChildSwipeRefreshLayout swipeRefreshLayout =
-                (ScrollChildSwipeRefreshLayout) root.findViewById(R.id.refresh_layout);
+        final ScrollChildSwipeRefreshLayout swipeRefreshLayout = (ScrollChildSwipeRefreshLayout) root.findViewById(R.id.refresh_layout);
         swipeRefreshLayout.setColorSchemeColors(
                 ContextCompat.getColor(getActivity(), R.color.colorPrimary),
                 ContextCompat.getColor(getActivity(), R.color.colorAccent),
@@ -212,6 +209,8 @@ public class TasksFragment extends Fragment implements TasksContract.View {
     TaskItemListener mItemListener = new TaskItemListener() {
         @Override
         public void onTaskClick(Task clickedTask) {
+            //为什么不直接调用本类中的showTaskDetailsUi(clieckedTask.getId())而是通过presenter.openTaskDetails(..)来回调呢？
+            //showTaskDetailsUi(clickedTask.getId());
             mPresenter.openTaskDetails(clickedTask);
         }
 
