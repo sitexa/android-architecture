@@ -70,17 +70,14 @@ public class TasksLocalDataSource implements TasksDataSource {
                 TaskEntry.COLUMN_NAME_COMPLETED
         };
 
-        Cursor c = db.query(
-                TaskEntry.TABLE_NAME, projection, null, null, null, null, null);
+        Cursor c = db.query(TaskEntry.TABLE_NAME, projection, null, null, null, null, null);
 
         if (c != null && c.getCount() > 0) {
             while (c.moveToNext()) {
                 String itemId = c.getString(c.getColumnIndexOrThrow(TaskEntry.COLUMN_NAME_ENTRY_ID));
                 String title = c.getString(c.getColumnIndexOrThrow(TaskEntry.COLUMN_NAME_TITLE));
-                String description =
-                        c.getString(c.getColumnIndexOrThrow(TaskEntry.COLUMN_NAME_DESCRIPTION));
-                boolean completed =
-                        c.getInt(c.getColumnIndexOrThrow(TaskEntry.COLUMN_NAME_COMPLETED)) == 1;
+                String description = c.getString(c.getColumnIndexOrThrow(TaskEntry.COLUMN_NAME_DESCRIPTION));
+                boolean completed = c.getInt(c.getColumnIndexOrThrow(TaskEntry.COLUMN_NAME_COMPLETED)) == 1;
                 Task task = new Task(title, description, itemId, completed);
                 tasks.add(task);
             }
